@@ -1,28 +1,3 @@
-// 6. Hotel Room Reservation with Inheritance
-// A seaside hotel has three types of rooms: StandardRoom, DeluxeRoom, and SuiteRoom. Each room type has different pricing and amenities. The hotel wants a basic reservation system that captures guest details, assigns rooms, and computes total charges. However, internal pricing rules (like seasonal multipliers or discounts) must not be directly modifiable from outside the room classes.
-
-// Requirements:
-
-// Create a base class Room with:
-// Room number, base price per night, and occupancy status.
-// A constructor that initializes the room number and base price.
-// Create derived classes:
-// StandardRoom, DeluxeRoom, and SuiteRoom that:
-// Set different base prices and maybe extra charges (e.g., complimentary breakfast, ocean-view surcharge) in their constructors.
-// Provide their own methods for calculating price (for example, calculatePrice or type-specific helpers).
-// Create a class Reservation that:
-// Ties a guest name to a Room for a certain number of nights.
-// In its constructor, ensures that a room is not already occupied before confirming.
-// Calculates the total cost using appropriate room-type-specific logic.
-// Use encapsulation to:
-// Keep room occupancy status private, changing it only via methods like checkIn(const std::string& gName) and checkOut().
-// Hide pricing details inside the room classes.
-// Use constructors and destructors to:
-// Display messages when reservations are created and destroyed, simulating allocation and release of booking resources.
-// The system should allow a tester to:
-// Create rooms of various types.
-// Create reservations.
-// Attempt to book an already occupied room and see that it is prevented by internal logic (not by manipulating fields directly).
 #include <iostream>
 #include <string>
 

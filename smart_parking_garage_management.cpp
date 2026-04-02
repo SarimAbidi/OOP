@@ -1,28 +1,3 @@
-//1. Smart Parking Garage Management
-//A new multi-level smart parking garage in your city wants to replace its manual system with a basic software model. The garage has multiple floors, and each floor has different types of parking spots (for cars, bikes, and electric cars). Each vehicle that enters is assigned a unique ticket ID, arrival time, and a specific slot. Electric vehicles additionally require information about charging duration. The garage also wants to track how many vehicles are currently parked of each type and automatically free the slot when a vehicle leaves.
-//
-//Requirements:
-//
-//Design a base class Vehicle that stores common information for all vehicles (e.g., registration number, owner name).
-//Create derived classes Car, Bike, and ElectricCar that extend Vehicle with specific attributes (e.g., ElectricCar has a charging duration).
-//Design a class ParkingSlot that:
-//Is responsible for storing which Vehicle is parked in it.
-//Has information like floor number, slot number, and slot type.
-//Ensures that once a slot is occupied, it cannot be assigned to another vehicle until it is freed (use encapsulation to protect slot state).
-//Design a class Ticket that is created when a vehicle enters:
-//Must be initialized using a constructor with a unique ticket ID, entry time, and association to the Vehicle and the ParkingSlot (you may use identifiers, objects, or references but do NOT use pointers).
-//When a vehicle leaves, a method should compute the total parked duration and (optionally) print a simple bill.
-//Use constructors to ensure that:
-//A Vehicle object must always be created with valid registration number and owner name.
-//A ParkingSlot cannot be created without specifying its floor, slot number, and type.
-//Use encapsulation to:
-//Prevent direct modification of ParkingSlot occupancy from outside; provide methods like assignVehicle() and removeVehicle().
-//Control access to billing-related data inside Ticket.
-//Assume this is a console application; you do not need to implement real time or user input, but you must structure the classes so a tester can:
-//Create some vehicles of different types.
-//Assign them slots, generate tickets.
-//Simulate exit and check that slot freeing and counts are updated correctly.
-//Specify all classes, their relationships, constructors, and key methods. You do not need to write the full user interface, just the class designs and core logic.
 #include <iostream>
 #include <string>
 

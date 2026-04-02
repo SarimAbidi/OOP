@@ -1,33 +1,3 @@
-// 4. Library Book Lending with Membership Levels
-// A community library has books and different types of members. Members can be RegularMember or PremiumMember. Regular members can borrow fewer books and for a shorter duration than premium members. Some books are reference-only and cannot be borrowed at all. The librarian wants a program that handles basic lending rules but hides internal counters and validation details from direct modification.
-
-// Requirements:
-
-// Create a class hierarchy:
-// Base class Member with attributes like member ID, name, and maximum allowed borrowed books.
-// RegularMember and PremiumMember inherit from Member and set different borrowing limits in their constructors.
-// Create a class Book that includes:
-// Book ID, title, author, and a flag indicating if it is reference-only.
-// Internal status of whether it is currently borrowed.
-// Use encapsulation to:
-// Make book status private and only modifiable via methods like borrow(...) and returnBook().
-// Prevent borrowing if:
-// The book is reference-only.
-// The book is already borrowed.
-// The member has reached their borrowing limit.
-// Use constructors to:
-// Initialize Member and Book objects with all required data.
-// For derived Member classes, automatically set appropriate limits in the constructor.
-// Optionally, create a class Library that:
-// Contains collections of Book and Member (you may use fixed-size arrays, but do not use std::vector).
-// Provides methods like lendBook(memberId, bookId) that internally finds objects and delegates to the borrow() method.
-// Use destructors or explicit cleanup methods to:
-// Log when a book object is destroyed (e.g., removed from the system) or a member is removed.
-// Students must design interactions such that:
-// Books and members are created.
-// Borrowing and returning operations are tested with both valid and invalid cases.
-// Attempts to violate the rules are safely handled inside methods, not by modifying fields directly.
-// Important: In your implementation, do NOT use virtual functions, the override keyword, std::vector, or pointers.
 #include <iostream>
 #include <string>
 

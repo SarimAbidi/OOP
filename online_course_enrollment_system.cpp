@@ -1,29 +1,3 @@
-// 2. Online Course Enrollment System
-// An online learning platform offers different types of courses (recorded, live sessions, and hybrid). Each course has basic information like title, instructor, and fee. Recorded courses have a fixed number of video lectures, live courses have scheduled dates and time slots, and hybrid courses mix both. Students can enroll in courses, but the platform wants to hide sensitive internal details such as discount calculation and enrollment count from direct access.
-
-// Requirements:
-
-// Create a base class Course that includes:
-// Common attributes like course ID, title, instructor, and base fee.
-// A constructor that initializes all these attributes.
-// Create derived classes:
-// RecordedCourse with an additional attribute for number of video lectures.
-// LiveCourse with attributes for start date and time, and number of live sessions.
-// HybridCourse that contains both recorded and live-related information.
-// Each course type should extend methods (for example, by adding its own data to printDetails or by adding extra fee components inside the class) to include its own specific information or additional fee rules (like extra cost for live interaction).
-// Create a class Student with attributes like student ID, name, and enrolled courses.
-// Use encapsulation to:
-// Prevent direct modification of course fee from outside the Course hierarchy.
-// Allow controlled enrollment through methods like enrollInCourse(...) inside Student, which internally updates an encapsulated list.
-// Internally keep track of how many students are enrolled in each course (private counter with public getter).
-// Use constructors (and destructors if you wish) to:
-// Announce (e.g., via console output) when a Course object is created, to simulate resource allocation.
-// Ensure that a Student must have a valid ID and name at creation.
-// Design the interactions so that a tester can:
-// Create different course objects.
-// Create students and enroll them in various course types.
-// Print detailed information about each student’s enrollments and each course’s enrollment count.
-// Do not implement file handling or databases; focus on class design, constructors, inheritance, and encapsulation.
 #include <iostream>
 #include <string>
 
