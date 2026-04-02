@@ -1,0 +1,149 @@
+// 2. Online Course Enrollment System
+// An online learning platform offers different types of courses (recorded, live sessions, and hybrid). Each course has basic information like title, instructor, and fee. Recorded courses have a fixed number of video lectures, live courses have scheduled dates and time slots, and hybrid courses mix both. Students can enroll in courses, but the platform wants to hide sensitive internal details such as discount calculation and enrollment count from direct access.
+
+// Requirements:
+
+// Create a base class Course that includes:
+// Common attributes like course ID, title, instructor, and base fee.
+// A constructor that initializes all these attributes.
+// Create derived classes:
+// RecordedCourse with an additional attribute for number of video lectures.
+// LiveCourse with attributes for start date and time, and number of live sessions.
+// HybridCourse that contains both recorded and live-related information.
+// Each course type should extend methods (for example, by adding its own data to printDetails or by adding extra fee components inside the class) to include its own specific information or additional fee rules (like extra cost for live interaction).
+// Create a class Student with attributes like student ID, name, and enrolled courses.
+// Use encapsulation to:
+// Prevent direct modification of course fee from outside the Course hierarchy.
+// Allow controlled enrollment through methods like enrollInCourse(...) inside Student, which internally updates an encapsulated list.
+// Internally keep track of how many students are enrolled in each course (private counter with public getter).
+// Use constructors (and destructors if you wish) to:
+// Announce (e.g., via console output) when a Course object is created, to simulate resource allocation.
+// Ensure that a Student must have a valid ID and name at creation.
+// Design the interactions so that a tester can:
+// Create different course objects.
+// Create students and enroll them in various course types.
+// Print detailed information about each student’s enrollments and each course’s enrollment count.
+// Do not implement file handling or databases; focus on class design, constructors, inheritance, and encapsulation.
+#include <iostream>
+#include <string>
+
+class Course {
+protected:
+    std::string id;
+    std::string title;
+    std::string instructor;
+    double baseFee;
+    int enrolledCount;
+public:
+    Course(const std::string& i, const std::string& t,
+           const std::string& ins, double fee)
+        : id(i), title(t), instructor(ins),
+          baseFee(fee), enrolledCount(0) {}
+
+    std::string getId() const { return id; }
+    double calculateFinalFee() const { return baseFee; }
+    void printBasicDetails() const {
+        std::cout << "Course: " << title << " (" << id << ")\n";
+    }
+
+    void incrementEnrollment() { enrolledCount++; }
+    int getEnrolledCount() const { return enrolledCount; }
+};
+
+class RecordedCourse : public Course {
+    int videoCount;
+public:
+    RecordedCourse(const std::string& i, const std::string& t,
+                   const std::string& ins, double fee, int vids)
+        : Course(i, t, ins, fee), videoCount(vids) {}
+
+    void printDetails() const {
+        printBasicDetails();
+        std::cout << "Recorded videos: " << videoCount << "\n";
+    }
+};
+
+class LiveCourse : public Course {
+    std::string schedule;
+    int sessions;
+public:
+    LiveCourse(const std::string& i, const std::string& t,
+               const std::string& ins, double fee,
+               const std::string& sched, int sess)
+        : Course(i, t, ins, fee),
+          schedule(sched), sessions(sess) {}
+
+    double calculateFinalFee() const {
+        return baseFee + 200; // example extra cost
+    }
+
+    void printDetails() const {
+        printBasicDetails();
+        std::cout << "Live schedule: " << schedule
+                  << ", sessions: " << sessions << "\n";
+    }
+};
+
+class HybridCourse : public Course {
+    int videoCount;
+    int liveSessions;
+public:
+    HybridCourse(const std::string& i, const std::string& t,
+                 const std::string& ins, double fee,
+                 int vids, int sess)
+        : Course(i, t, ins, fee),
+          videoCount(vids), liveSessions(sess) {}
+
+    double calculateFinalFee() const {
+        return baseFee + 150;
+    }
+
+    void printDetails() const {
+        printBasicDetails();
+        std::cout << "Hybrid: " << videoCount
+                  << " videos, " << liveSessions
+                  << " live sessions\n";
+    }
+};
+
+class Student {
+    std::string id;
+    std::string name;
+    static const int MAX_COURSES = 5;
+    std::string enrolledCourseIds[MAX_COURSES];
+    int enrolledCount;
+public:
+    Student(const std::string& i, const std::string& n)
+        : id(i), name(n), enrolledCount(0) {}
+
+    void enrollInCourse(Course& c) {
+        if (enrolledCount >= MAX_COURSES) return;
+        enrolledCourseIds[enrolledCount] = c.getId();
+        enrolledCount++;
+        c.incrementEnrollment();
+    }
+
+    void printInfo() const {
+        std::cout << "Student " << name << " (" << id << ")\n";
+        std::cout << "Enrolled in " << enrolledCount << " course(s):\n";
+        for (int i = 0; i < enrolledCount; ++i) {
+            std::cout << "- " << enrolledCourseIds[i] << "\n";
+        }
+    }
+};
+
+int main() {
+    RecordedCourse rc("R101", "C++ Basics", "Ali", 1000, 20);
+    LiveCourse lc("L201", "OOP Live", "Sara", 1500, "MWF 5-7", 10);
+    HybridCourse hc("H301", "Data Structures", "Ahmed", 2000, 15, 6);
+
+    Student s1("S1", "Hassan");
+    s1.enrollInCourse(rc);
+    s1.enrollInCourse(hc);
+
+    s1.printInfo();
+
+    std::cout << "Enroll count Data Structures: "
+              << hc.getEnrolledCount() << "\n";
+    return 0;
+}
